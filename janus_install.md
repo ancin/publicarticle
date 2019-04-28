@@ -89,20 +89,13 @@ turn_port = 3478
 turn_type = udp
 turn_user = username
 turn_pwd = password
-1
-2
-3
-4
-5
-6
+
 2.配置TURN REST API动态获取turn 服务
 
 turn_rest_api = http://yourbackend.com/path/to/api
 turn_rest_api_key = anyapikeyyoumayhaveset
 turn_rest_api_method = GET
-1
-2
-3
+
 其他相关配置需要的话可以参考对应注释使用
 
 janus.transport.http.cfg
@@ -119,17 +112,7 @@ port = 18000                                    ; Web server HTTP port
 ;ip = 192.168.0.1                       ; Whether we should bind this server to a specific IP address (v4 or v6) only
 https = yes                                     ; Whether to enable HTTPS (default=no)
 secure_port = 18001                     ; Web server HTTPS port, if enabled
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
+
 在这里可以配置监听端口线程数等，支持http和https
 
 janus.plugin.sip.cfg
@@ -203,7 +186,7 @@ make && make install
 
 ## 使用turnadmin添加用户及计算密码
  添加lt-cred-mech用户： 
-./turnadmin -a -u songpeng -p 123456ty -r songpeng
+./turnadmin -a -u XXXX -p 123456ty -r XXXX
 其中的参数含义 
 -a: 表示使用lt-cred-mech方式连接 
 -u：用户名 
@@ -211,13 +194,49 @@ make && make install
 -r ：realm 域。自己试了，似乎随便写，没啥影响。
 
 添加admins用户，应该是使用https时使用吧 
-./turnadmin -A -u songpeng -p 123456ty -r songpeng
+./turnadmin -A -u XXX -p 123456 -r XXXX
 
 其中的参数含义同上， 
 -A：表示admin用户。
 
 根据用户名、密码、realm计算出值 
-./turnadmin -k -u songpeng -p 123456ty -r songpeng
+./turnadmin -k -u XXX -p 123456 -r XXX
 
 此时会出来一串数字。 
-XXXXXXX
+XXXX
+
+## 配置turnserver.conf文件
+
+
+
+turnserver -L  -o -a -b /etc/turnuserdb.conf -f -r shanghai
+
+openssl req -x509 -newkey rsa:2048 -keyout /usr/local/etc/turn_server_pkey.pem -out /usr/local/etc/turn_server_cert.pem -days 99999 -nodes
+
+vim /usr/local/etc/turnuserdb.conf
+
+relay-device=eth0
+listening-ip=172.31.148.197
+listening-port=3478
+tls-listening-port=5349
+relay-ip=172.31.148.197
+external-ip=47.105.165.68
+relay-threads=20
+lt-cred-mech
+cert=/usr/local/etc/turn_server_cert.pem
+pkey=/usr/local/etc/turn_server_pkey.pem
+min-port=49152
+max-port=65535
+userdb=/usr/local/etc/turnuserdb.conf
+user=songpeng:0x58f28fffe635382b060eaddc332ed93a
+no-loopback-peers  
+no-multicast-peers  
+no-tcp  
+no-tls  
+no-cli
+
+turnserver -v -r 47.105.165.68:3478 -a -o -c /usr/local/etc/turnserver.conf
+
+/usr/local/var/db/turndb
+
+turnutils_stunclient 47.105.165.68
