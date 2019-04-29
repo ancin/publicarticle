@@ -220,7 +220,7 @@ listening-ip=172.31.148.197
 listening-port=3478
 tls-listening-port=5349
 relay-ip=172.31.148.197
-external-ip=47.105.165.68
+external-ip=47.105.XXX
 relay-threads=20
 lt-cred-mech
 cert=/usr/local/etc/turn_server_cert.pem
@@ -235,8 +235,9 @@ no-tcp
 no-tls  
 no-cli
 
-turnserver -v -r 47.105.165.68:3478 -a -o -c /usr/local/etc/turnserver.conf
+turnserver -v -r 47.105.XXXX:3478 -a -o -c /usr/local/etc/turnserver.conf
 
 /usr/local/var/db/turndb
 
-turnutils_stunclient 47.105.165.68
+
+bin/turnserver -v -r 47.105.XXX:3478 -a -o -c /root/live/coturn/turnserver.conf
