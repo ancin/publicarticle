@@ -20,3 +20,22 @@ tar -zxvf Apache_OpenOffice_4.1.4_Linux_x86-64_install-rpm_zh-CN.tar.gz  -C ../s
 ## 查看端口
  [root@localhost opt]# netstat -lnp |grep 8100
  
+ 
+ 
+# centos 乱码解决
+## 找到jdk 安装路径。
+## 将字体：simhei.ttf 黑体、simsun.ttc 宋体（windows下通过everything找下）上传至/usr/java/jdk1.8.0_91/jre/lib/fonts/fallback路径下。
+# 查看系统路径
+## root@80ec6 fallback]# cat /etc/fonts/fonts.conf
+# 字体拷贝。
+## 将 /usr/java/jdk1.8.0_91/jre/lib/fonts的全部内容，拷贝到步骤3查看的路径下， 我的字体路径为：/usr/share/fonts。
+
+# 更新缓存
+
+  执行命令：fc-cache
+## kill掉openoffice进程。
+
+[root@80ec6 fonts]# ps -ef | grep openoffice
+  kill -9 xxx
+## 重启后台运行openoffice
+ 
