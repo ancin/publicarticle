@@ -5,6 +5,13 @@ $ yum update -y
 $ yum clean all
 $ reboot
 
+#安装基础包
+$ yum install wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct
+
+$ yum install wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct \
+dnsmasq ntp logrotate httpd-tools firewalld libselinux-python conntrack-tools openssl iproute python-dbus PyYAML \
+glusterfs-fuse device-mapper-multipath nfs-utils iscsi-initiator-utils ceph-common atomic python-docker-py
+
 # 安装 Docker
 $ yum install -y docker
 $ systemctl start docker
@@ -39,4 +46,4 @@ oc cluster up \ –host-data-dir=’HOME/oc/profiles/HOME/oc/profiles/PROFILE/da
  oc cluster up --public-hostname '192.168.42.65'
  oc cluster up --public-hostname '192.168.8.223'
 
- 
+
