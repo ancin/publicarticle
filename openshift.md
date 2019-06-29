@@ -12,6 +12,8 @@ $ yum install wget git net-tools bind-utils yum-utils iptables-services bridge-u
 dnsmasq ntp logrotate httpd-tools firewalld libselinux-python conntrack-tools openssl iproute python-dbus PyYAML \
 glusterfs-fuse device-mapper-multipath nfs-utils iscsi-initiator-utils ceph-common atomic python-docker-py
 
+#启动 etcd
+
 # 安装 Docker
 $ yum install -y docker
 $ systemctl start docker
