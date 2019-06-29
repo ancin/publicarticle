@@ -24,6 +24,8 @@ add OPTIONS --insecure-registry "172.30.0.0/16" to docker daemon
 
 $ systemctl restart docker
 
+$ docker info | egrep -i 'storage|pool|space|filesystem'
+
 # 安装及启动 OpenShift
 ## 官方github下载 并解压
 将 OpenShift 的相关命令追加至系统的 PATH 环境变量中。编辑 /etc/profile 文件，添加如下文本内容至文件末尾。
