@@ -58,3 +58,6 @@ oc cluster up \ –host-data-dir=’HOME/oc/profiles/HOME/oc/profiles/PROFILE/da
  oc cluster up --public-hostname '192.168.8.223'
 
 
+#问题 参考
+
+https://github.com/openshift/origin/blob/release-3.11/docs/cluster_up_down.md
