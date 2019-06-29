@@ -27,6 +27,13 @@ add OPTIONS --insecure-registry "172.30.0.0/16" to docker daemon
 $ systemctl restart docker
 
 $ docker info | egrep -i 'storage|pool|space|filesystem'
+# 防火墙添加docker分组
+firewall-cmd --permanent --new-zone dockerc
+firewall-cmd --permanent --zone dockerc --add-source 172.17.0.0/16
+firewall-cmd --permanent --zone dockerc --add-port 8443/tcp
+firewall-cmd --permanent --zone dockerc --add-port 53/udp
+firewall-cmd --permanent --zone dockerc --add-port 8053/udp
+firewall-cmd --reload
 
 # 安装及启动 OpenShift
 ## 官方github下载 并解压
