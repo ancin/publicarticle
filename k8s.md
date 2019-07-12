@@ -15,3 +15,22 @@ This shows a socket that is readable by root and by members of the docker group.
 
 Note that of course you always need to start the Docker daemon as root, but in general you would expect to have this configured to start automatically when your system boots, rather than starting it manually.
 
+# centos install kubernetes
+
+## close firewall
+  $ systemctl stop firewalld
+
+  $ yum install etcd kubernetes
+  把/etc/kubernetes/apiserver --admission_control Service_Account删除
+
+  ### 按照顺序启动
+   $ systemctl start etcd
+   $ systemctl start docker
+   $ systemctl start kube-apiserver
+   $ systemctl start kube-controller-manager
+   $ systemctl start kube-scheduler
+   $ systemctl start kubelet
+   $ systemctl start kube-proxy
+
+   ## 定义RC文件
+   
