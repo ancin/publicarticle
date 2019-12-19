@@ -1,0 +1,64 @@
+# springboot actuator监控
+## springboot 配置
+<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
+以及yuml配置
+
+management:
+  endpoints:
+    prometheus:
+      id: prometheus
+    web:
+      exposure:
+        include: "*"
+        
+ ## prometheus install and config
+ 
+  官网下载 gz
+  tar -xvf XXX
+  prometheus.yaml配置如下
+  scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+    metrics_path: '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+    - targets: ['localhost:9090']
+  - job_name: 'springboot'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+    - targets: ['localhost:8080']
+
+  ### 启动
+   nohup ./prometheus --config.file=prometheus.yml &
+   
+## grafana install
+
+  ### install  centos
+  cat <<EOF | sudo tee /etc/yum.repos.d/grafana.repo
+[grafana]
+name=grafana
+baseurl=https://packages.grafana.com/oss/rpm
+repo_gpgcheck=1
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.grafana.com/gpg.key
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+EOF
+
+sudo yum install grafana
+sudo service grafana-server start
+
+默认3000 端口。
+### 配置数据源
+ 把刚才的prometheus配置进去。就可以配置dashboard了。
+  
