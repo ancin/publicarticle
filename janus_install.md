@@ -1,4 +1,4 @@
-#Janus 安装
+# Janus 安装
 yum install -y epel-release && \
 yum update -y && \
 yum install -y deltarpm && \
@@ -56,7 +56,7 @@ make && make install && make configs
 -
 
 
-#问题解决：
+# 问题解决：
 
 .ibtoolize: AC_CONFIG_MACRO_DIR([./aclocal]) conflicts with ACLOCAL_AMFLAGS=-I ./aclocal
 
