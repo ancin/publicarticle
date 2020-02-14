@@ -241,3 +241,7 @@ turnserver -v -r 47.105.XXXX:3478 -a -o -c /usr/local/etc/turnserver.conf
 
 
 bin/turnserver -v -r 47.105.XXX:3478 -a -o -c /root/live/coturn/turnserver.conf
+# centos 防火墙开启
+firewall-cmd  --add-port=340079/tcp
+systemctl stop firewalld
+firewall-cmd  --list-ports
